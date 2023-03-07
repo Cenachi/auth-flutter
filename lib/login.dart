@@ -124,15 +124,12 @@ class _LoginState extends State<Login> {
     var response = await http.post(url,
         headers: {'Content-Type': 'application/json'}, body: body);
 
-    // if (response.statusCode == 200) {
-    //   var jsonResponse = jsonDecode(response.body);
-
-    //   print("token: ${jsonResponse['token']}");
-
-    //   if (jsonResponse != null) {
-    //     sharedPreferences.setString('token', jsonResponse['token']);
-    //   }
-    // }
+    if (response.statusCode == 200) {
+      var jsonResponse = jsonDecode(response.body);
+      var token = jsonResponse['token'];
+      await sharedPreferences.setString('token', token);
+      // return token;
+    }
 
     return response;
   }
